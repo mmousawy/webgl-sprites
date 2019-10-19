@@ -11,11 +11,10 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-var size = 10000;
-var divisions = 10000;
+const size = 1000;
+const divisions = 1000;
 
-var gridHelper = new THREE.GridHelper( size, divisions );
-gridHelper.rotation.x = THREE.Math.degToRad(90);
+const gridHelper = new THREE.GridHelper( size, divisions );
 gridHelper.position.x = 1;
 gridHelper.position.y = 0;
 
@@ -37,16 +36,22 @@ const material = new THREE.MeshBasicMaterial({
 const plane = new THREE.Mesh(geometry, material);
 
 plane.position.x = .5;
-plane.position.y = .5;
+plane.position.z = .5;
+plane.position.y = 0;
 plane.texture = texture;
 plane.speed = 2;
 plane.currentFrame = 0;
-plane.rotation.z = THREE.Math.degToRad(-90);
+plane.rotation.x = THREE.Math.degToRad(-90);
 
 planes.push(plane);
 
 scene.add(plane);
 
+
+window.addEventListener('mousewheel', event => {
+  const zoomDirection = (event.deltaY < 0) ? 0.9 : 1.1;
+  camera.position.y *= zoomDirection;
+});
 
 const animate = function () {
   requestAnimationFrame(animate);
