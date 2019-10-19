@@ -1,7 +1,11 @@
 const planes = [];
+const zoomDelta = 2;
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+camera.rotation.x = THREE.Math.degToRad(-90);
+camera.position.z = 0;
+camera.position.y = 10;
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -43,7 +47,6 @@ planes.push(plane);
 
 scene.add(plane);
 
-camera.position.z = 10;
 
 const animate = function () {
   requestAnimationFrame(animate);
